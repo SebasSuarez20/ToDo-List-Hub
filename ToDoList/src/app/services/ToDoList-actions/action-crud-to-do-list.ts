@@ -6,6 +6,7 @@ import { AlertService } from '../alert/alert.service';
 import { LoggerService } from '../logger/logger.service';
 import { taskModel } from 'src/app/model/taskModel';
 import { timer } from 'rxjs';
+import { ICategoryDTO } from 'src/app/model/dto/IcategoryDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -86,5 +87,15 @@ export class ActionCrudToDoList {
   public loadingUpdate(value:boolean){
      this.isLoading.set(value);
   }
+
+    public async assignedCategory(event:Partial<ICategoryDTO & {idTask:string}>){
+        try{
+          const { idTask,id,name} = event;
+          await this.database.updateTaskAssigned(idTask ?? "",id ?? "",name ?? "");
+        }catch(err){
+           this.logger.error('Error: ',`${err}`);
+        }
+        
+    }
 
 }
