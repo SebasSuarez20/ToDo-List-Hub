@@ -1,0 +1,90 @@
+<!-- ======= HEADER PREMIUM ======= -->
+<ion-header class="ion-no-border transparent-header">
+  <ion-toolbar class="glass-toolbar">
+    <div class="header-inner">
+      <div class="header-greeting">
+        <p class="greeting-line">Bienvenido de vuelta 👋</p>
+        <h1 class="header-title">Mi Lista</h1>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" routerLink="/categories">
+          <ion-icon name="grid-outline"></ion-icon>
+        </button>
+        <div class="header-avatar">SF</div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<!-- ======= CONTENT ======= -->
+<ion-content [fullscreen]="true" class="premium-bg">
+
+  <!-- Fondo decorativo con blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <div class="main-wrapper">
+
+    <!-- ---- Tarjeta de estadísticas / Progreso ---- -->
+    <div class="stats-card glass-card">
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-number">5</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number completed-num">3</span>
+          <span class="stat-label">Hechas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number pending-num">2</span>
+          <span class="stat-label">Pendientes</span>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <div class="progress-header">
+          <span class="progress-label">Progreso del día</span>
+          <span class="progress-percent">60%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 60%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- Input para agregar tarea ---- -->
+    <div class="add-card glass-card">
+      <p class="add-card-title">Nueva tarea</p>
+      <div class="input-container" [formGroup]="this.formTask">
+        <div class="custom-input-wrap">
+          <ion-icon name="create-outline" class="input-icon"></ion-icon>
+          <ion-input placeholder="¿Qué necesitas hacer hoy?" formControlName="title" class="custom-input"></ion-input>
+        </div>
+        <div class="custom-input-wrap description-wrap">
+          <ion-icon name="document-text-outline" class="input-icon"></ion-icon>
+          <ion-textarea placeholder="Añade una descripción linda..." formControlName="description" class="custom-input custom-textarea" [autoGrow]="true" rows="1"></ion-textarea>
+        </div>
+        <button class="add-btn-full" (click)="insertAsyncTask()">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          <span>Agregar Tarea</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ---- Sección de filtros ---- -->
+    <div class="filter-row">
+      <button class="filter-chip" [ngClass]="isAllTask ? 'active' : ''" (click)="this.isAllTask = true">Todas</button>
+      <button class="filter-chip" [ngClass]="isAllTask ? '' : 'active'"
+        (click)="viewInformationComplete()">Completadas</button>
+    </div>
+    @if (this.isAllTask) {
+    <app-task-list [taskInformation]="taskInformation" [isLoading]="isLoading()" (deleteTask)="this.deleteAsyncTask($event)"
+      (addTask)="this.updateAsyncTask($event)" />
+    }@else {
+    <app-task-list [taskInformation]="taskInformationComplete" [isLoading]="isLoading()" />
+    }
+  </div>
+</ion-content>

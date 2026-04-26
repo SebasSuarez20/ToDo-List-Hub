@@ -1,0 +1,764 @@
+// --- Fondo principal ---
+.premium-bg {
+  --background: #0f0c29;
+  --background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+// --- Blobs decorativos de fondo ---
+.bg-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, #7c3aed, transparent);
+  top: -80px;
+  right: -80px;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #06b6d4, transparent);
+  bottom: 80px;
+  left: -60px;
+}
+
+// --- Toolbar transparente ---
+.transparent-header {
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+    padding-top: 10px;
+  }
+}
+
+.glass-toolbar {
+  --background: transparent;
+  --border-width: 0;
+}
+
+// --- Contenido del header ---
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px 18px 22px;
+}
+
+.header-greeting {
+  display: flex;
+  flex-direction: column;
+
+  .greeting-line {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 4px 0;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .header-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(124, 58, 237, 0.5);
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+
+  &:active {
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  ion-icon {
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.header-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+  flex-shrink: 0;
+}
+
+// --- Wrapper principal ---
+.main-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 0 16px 100px 16px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+// --- Glass Card base ---
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+}
+
+// ==========================================
+// Tarjeta de Estadísticas / Progreso
+// ==========================================
+.stats-card {
+  padding: 22px 20px 18px 20px;
+
+  .stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 22px;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+    }
+
+    .completed-num {
+      color: #34d399;
+    }
+
+    .pending-num {
+      color: #fb923c;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 1px;
+  }
+
+  .progress-section {
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .progress-label {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+      }
+
+      .progress-percent {
+        font-size: 13px;
+        color: #a78bfa;
+        font-weight: 700;
+      }
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #7c3aed, #06b6d4);
+        border-radius: 20px;
+        transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    }
+  }
+}
+
+// ==========================================
+// Tarjeta Agregar Tarea
+// ==========================================
+.add-card {
+  padding: 20px 18px;
+
+  .add-card-title {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 14px 0;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .custom-input-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 0 14px;
+    gap: 10px;
+
+    .input-icon {
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .custom-input {
+      --color: white;
+      --placeholder-color: rgba(255, 255, 255, 0.3);
+      --background: transparent;
+      font-size: 15px;
+      font-weight: 500;
+      flex: 1;
+    }
+  }
+
+  .description-wrap {
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    
+    .input-icon {
+      margin-top: 2px;
+    }
+
+    .custom-textarea {
+      --padding-top: 0;
+      --padding-bottom: 0;
+      margin: 0;
+    }
+  }
+
+  .add-btn-full {
+    width: 100%;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-top: 4px;
+
+    &:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 10px rgba(124, 58, 237, 0.3);
+    }
+
+    ion-icon {
+      font-size: 20px;
+      color: white;
+    }
+
+    span {
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// ==========================================
+// Filtros
+// ==========================================
+.filter-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-chip {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.active {
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
+    }
+  }
+}
+
+// ==========================================
+// Lista de Tareas
+// ==========================================
+.task-section {
+  .section-heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 16px 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+
+    ion-icon {
+      font-size: 17px;
+      color: #a78bfa;
+    }
+  }
+}
+
+.tasks-list {
+  background: transparent;
+  padding: 0;
+
+  ion-item-sliding {
+    border-radius: 18px;
+    margin-bottom: 12px;
+    background: transparent;
+    overflow: visible;
+  }
+}
+
+// --- Tarjeta individual de tarea ---
+.task-card {
+  --background: rgba(255, 255, 255, 0.07);
+  --border-radius: 18px;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+
+  &.task-done {
+    --background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+  }
+
+  .task-body {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 18px;
+  }
+
+  .task-check {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+
+    ion-icon {
+      font-size: 17px;
+      color: white;
+      display: none;
+    }
+
+    &.check-active {
+      background: linear-gradient(135deg, #34d399, #06b6d4);
+      border-color: transparent;
+      box-shadow: 0 3px 12px rgba(52, 211, 153, 0.4);
+
+      ion-icon {
+        display: block;
+      }
+    }
+  }
+
+  .task-info {
+    flex: 1;
+
+    .task-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      margin: 0 0 7px 0;
+      line-height: 1.4;
+      transition: all 0.3s ease;
+
+      &.task-strike {
+        text-decoration: line-through;
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .task-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .task-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+
+      &.badge-design {
+        background: rgba(167, 139, 250, 0.2);
+        color: #a78bfa;
+        border: 1px solid rgba(167, 139, 250, 0.3);
+      }
+
+      &.badge-dev {
+        background: rgba(6, 182, 212, 0.2);
+        color: #22d3ee;
+        border: 1px solid rgba(6, 182, 212, 0.3);
+      }
+
+      &.badge-pending {
+        background: rgba(251, 146, 60, 0.2);
+        color: #fb923c;
+        border: 1px solid rgba(251, 146, 60, 0.3);
+      }
+
+      &.badge-personal {
+        background: rgba(52, 211, 153, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(52, 211, 153, 0.3);
+      }
+    }
+
+    .task-date {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.3);
+      font-weight: 400;
+    }
+  }
+
+  .task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .action-icon {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      ion-icon {
+        font-size: 14px;
+      }
+
+      &.edit-icon {
+        color: #f59e0b;
+        &:active { background: rgba(245, 158, 11, 0.2); }
+      }
+
+      &.delete-icon {
+        color: #ef4444;
+        &:active { background: rgba(239, 68, 68, 0.2); }
+      }
+    }
+  }
+}
+
+// --- Skeleton Card Styling ---
+.skeleton-card {
+  --background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+
+  .skeleton-check {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: transparent;
+  }
+
+  ion-skeleton-text {
+    --background: rgba(255, 255, 255, 0.05);
+    --background-rgb: 255, 255, 255;
+    margin: 0;
+  }
+  
+  .skeleton-actions {
+    gap: 6px;
+    ion-skeleton-text {
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+// --- Botón de swipe para borrar ---
+ion-item-option.swipe-delete {
+  border-radius: 0 18px 18px 0;
+  padding: 0 22px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: -4px 0 15px rgba(239, 68, 68, 0.3);
+}
+
+// ==========================================
+// Paginador Espectacular (Neo-Glass)
+// ==========================================
+.paginator-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.neo-paginator {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .neo-nav-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    .double-icon {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      ion-icon {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+      }
+
+      ion-icon + ion-icon {
+        margin-left: -8px;
+      }
+    }
+
+    .btn-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.8) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      z-index: 0;
+      border-radius: 50%;
+    }
+
+    &:hover:not(:disabled) {
+      border-color: rgba(124, 58, 237, 0.5);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(124, 58, 237, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+      .double-icon {
+        transform: scale(1.1);
+      }
+
+      .double-icon ion-icon {
+        color: white;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+      }
+
+      .btn-glow {
+        width: 100px;
+        height: 100px;
+        opacity: 0.8;
+      }
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0) scale(0.95);
+    }
+
+    &.next:hover:not(:disabled) .btn-glow {
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, transparent 70%);
+    }
+    &.next:hover:not(:disabled) {
+      border-color: rgba(6, 182, 212, 0.5);
+      box-shadow: 0 15px 35px rgba(6, 182, 212, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    &[disabled] {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: scale(0.9);
+    }
+  }
+
+  .neo-page-display {
+    z-index: 1;
+
+    .orb-container {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orb-ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      animation: spin-slow 10s linear infinite;
+    }
+
+    .orb-core {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(124, 58, 237, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.6);
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        right: 6px;
+        height: 14px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+        border-radius: 20px 20px 0 0;
+        pointer-events: none;
+      }
+
+      .number {
+        font-size: 18px;
+        font-weight: 900;
+        color: white;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        letter-spacing: -1px;
+      }
+    }
+  }
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

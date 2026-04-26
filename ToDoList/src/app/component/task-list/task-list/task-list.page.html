@@ -1,0 +1,77 @@
+ <!-- ---- Lista de Tareas ---- -->
+    <div class="task-section">
+      <h2 class="section-heading">
+        <ion-icon name="list-outline"></ion-icon> Tus Tareas
+      </h2>
+
+      <ion-list class="tasks-list">
+
+        @if (isLoading) {
+          <!-- SKELETON LOADER -->
+          <app-loading-skeleton/>
+        } @else {
+          <!-- TAREA COMPLETADA -->
+          @for (task of taskInformation; track task.id) {
+            <ion-item-sliding>
+              <ion-item lines="none" class="task-card" [class.task-done]="task.is_completed">
+                <div class="task-body">
+                  <div class="task-check" [class.check-active]="task.is_completed" (click)="updateAsyncTask(task.id,task.is_completed)">
+                    <ion-icon [name]="task.is_completed ? 'checkmark' : ''"></ion-icon>
+                  </div>
+                  <div class="task-info">
+                    <p class="task-title" [class.task-strike]="task.is_completed">{{ task.title }}</p>
+                    <div class="task-meta">
+                      <!-- <span class="task-badge" [class]="'badge-' + task.category">{{ task.categoryLabel }}</span> -->
+                      <span class="task-date">Fecha Creación: {{ task.created_at | date:'dd-mm-yyy | hh:mm:ss' }}</span>
+                    </div>
+                  </div>
+                  <div class="task-actions">
+                    <button class="action-icon delete-icon" (click)="this.deleteAsyncTask(task.id)">
+                      <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              </ion-item>
+  
+              <ion-item-options side="end">
+                <ion-item-option color="danger" class="swipe-delete">
+                  <ion-icon slot="top" name="trash-outline"></ion-icon>
+                  Borrar
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          }
+        }
+
+      </ion-list>
+
+      <!-- Paginador Neo-Glass -->
+      <div class="paginator-container">
+        <div class="neo-paginator">
+          <button class="neo-nav-btn prev" disabled>
+            <div class="btn-glow"></div>
+            <div class="double-icon">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </div>
+          </button>
+          
+          <div class="neo-page-display">
+            <div class="orb-container">
+              <div class="orb-ring"></div>
+              <div class="orb-core">
+                <span class="number">1</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="neo-nav-btn next">
+            <div class="btn-glow"></div>
+            <div class="double-icon">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
