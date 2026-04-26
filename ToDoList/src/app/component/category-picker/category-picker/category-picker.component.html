@@ -1,0 +1,36 @@
+
+      <!-- PANAL LATERAL (SIDE DRAWER) EXTREMO -->
+      <div class="side-panel-overlay" [class.panel-active]="this.IsvisiblityPanel" >
+    
+        <div class="side-panel-content" (click)="$event.stopPropagation()">
+          <div class="panel-header">
+            <div class="header-line"></div>
+            <h3 class="panel-title">Elegir Categoría</h3>
+                <button (click)="closePanel()">Cerrar</button>
+
+            <button class="close-panel" >
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </div>
+
+          @for (item of this.informationCategory; track $index) {
+          
+          
+          <div class="panel-body" >
+            <div class="priority-option high" (click)="this.assigned(item)">
+              <div class="option-icon"><ion-icon name="flame"></ion-icon></div>
+              <div class="option-info">
+                <span class="option-title">{{item.name}}</span>
+              </div>
+              <div class="option-arrow"><ion-icon name="chevron-forward"></ion-icon></div>
+            </div>
+          </div>
+          
+          }
+
+       
+          <div class="panel-footer">
+            <p>Escoge una categoría y empieza a organizar todo fácilmente 🚀</p>
+          </div>
+        </div>
+      </div>

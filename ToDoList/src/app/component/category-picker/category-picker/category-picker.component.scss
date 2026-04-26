@@ -1,4 +1,4 @@
-// --- Fondo principal ---
+ // --- Fondo principal ---
 .premium-bg {
   --background: #0f0c29;
   --background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
@@ -1054,3 +1054,48 @@ ion-item-option.swipe-delete {
 
  
 }
+ 
+ // ==========================================
+  // Category Badge Extremadamente Hermoso
+  // ==========================================
+  .category-badge-wrapper {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .category-badge-premium {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(6, 182, 212, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(6, 182, 212, 0.3));
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.2);
+    }
+
+    ion-icon {
+      font-size: 14px;
+      color: #a78bfa;
+      filter: drop-shadow(0 0 5px rgba(167, 139, 250, 0.8));
+    }
+
+    span {
+      font-size: 11px;
+      font-weight: 800;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+  }

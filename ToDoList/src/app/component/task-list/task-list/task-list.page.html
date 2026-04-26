@@ -19,10 +19,27 @@
                     <ion-icon [name]="task.is_completed ? 'checkmark' : ''"></ion-icon>
                   </div>
                   <div class="task-info">
+                    <!-- CATEGORY BADGE EXTREMADAMENTE HERMOSO -->
+                    <div class="category-badge-wrapper">
+                      <span class="category-badge-premium">
+                        <ion-icon name="bookmark-outline"></ion-icon>
+                        <span> {{task.id_category !== null ? "Categoria:" + task.name_category : 'Sin vinculación de categoria.'}}</span>
+                      </span>
+                    </div>
+
                     <p class="task-title" [class.task-strike]="task.is_completed">{{ task.title }}</p>
+                    
                     <div class="task-meta">
-                      <!-- <span class="task-badge" [class]="'badge-' + task.category">{{ task.categoryLabel }}</span> -->
                       <span class="task-date">Fecha Creación: {{ task.created_at | date:'dd-mm-yyy | hh:mm:ss' }}</span>
+                      
+                              
+                      <div class="neo-select-wrapper" (click)="toggleSidePanel(task)">
+                        <div class="priority-trigger">
+                          <div class="status-indicator"></div>
+                          <span class="trigger-label">Asignar Categoría</span>
+                          <ion-icon name="chevron-forward-outline" class="trigger-arrow"></ion-icon>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="task-actions">
@@ -45,6 +62,12 @@
 
       </ion-list>
 
+      @if (showSidePanel) {
+        <app-category-picker [IsvisiblityPanel]="this.showSidePanel" 
+        [informationCategory]="this.informationCategory"
+        (assignedId)="this.assignedCategory($event)" />
+      }
+      
       <!-- Paginador Neo-Glass -->
       <div class="paginator-container">
         <div class="neo-paginator">

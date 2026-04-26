@@ -5,6 +5,7 @@ import { DatabaseServiceCategory } from '../dbCategory/database.service';
 import { DatabaseServiceTask } from '../dbTask/database.service';
 import { ICategoryDTO } from 'src/app/model/dto/IcategoryDTO';
 import { timer } from 'rxjs';
+import { actionDb } from 'src/app/enum/actionsDb';
 
 @Injectable({
   providedIn: 'root',
@@ -92,6 +93,7 @@ export class CategoryActions {
       if(id === null || id === "") throw new Error("no se encontro el id correspondiente.");
 
       await this.database.updteCategoryForId(id, name);
+      await this.databaseTask.triggerTask(actionDb.update, { id: id, name: name });
       await this.alert.success("Excelente", "Se actualizo la categoria.", 1500);
        formCategory.reset();
        this.isUpdate = false;
@@ -121,6 +123,7 @@ export class CategoryActions {
     try{
        if(id === null || id === "") throw new Error("no se encontro el id correspondiente.");
       await this.database.deleteCategory(id);
+      await this.databaseTask.triggerTask(actionDb.delete, { id: id })
       await this.alert.success("Excelente", "Se elimino la categoria.", 1500);
     }catch(err){
        this.alert.error("Error", "No se pudo eliminar correctamente la categoria.");
