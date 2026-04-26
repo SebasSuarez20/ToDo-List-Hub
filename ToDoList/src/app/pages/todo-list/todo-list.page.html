@@ -82,7 +82,7 @@
     </div>
     @if (this.isAllTask) {
     <app-task-list [taskInformation]="taskInformation" [isLoading]="isLoading()" (deleteTask)="this.deleteAsyncTask($event)"
-      (addTask)="this.updateAsyncTask($event)" />
+      (addTask)="this.updateAsyncTask($event)" (assignedId)="this.assignedIdToCategory($event)" />
     }@else {
     <app-task-list [taskInformation]="taskInformationComplete" [isLoading]="isLoading()" />
     }

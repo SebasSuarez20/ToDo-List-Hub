@@ -57,6 +57,11 @@ export class DatabaseServiceCategory {
 
       if(modeldto === null) throw new Error("modelo incorrecto al enviar.");
 
+      const validatorUniqueTask = (await this.getCategory()).
+          some(s => s.name.trim().toLocaleLowerCase() == modeldto.name.trim().toLocaleLowerCase());
+
+          if (validatorUniqueTask) throw new Error("Categoria ya existente");
+
       const data = await this.getCategory();
       data.push(modeldto);
       await this._storage?.set(this.keyDb, data);

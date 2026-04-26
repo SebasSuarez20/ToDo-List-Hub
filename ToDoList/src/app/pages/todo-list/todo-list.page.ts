@@ -18,6 +18,7 @@ import { DatabaseServiceTask } from 'src/app/services/dbTask/database.service';
 import { TaskListPage } from "src/app/component/task-list/task-list/task-list.page";
 import { LoggerService } from 'src/app/services/logger/logger.service';
 import { ActionCrudToDoList } from 'src/app/services/ToDoList-actions/action-crud-to-do-list';
+import { ICategoryDTO } from 'src/app/model/dto/IcategoryDTO';
 
 @Component({
   selector: 'app-todo-list',
@@ -91,6 +92,7 @@ export class TodoListPage {
 
   private async loadInformationInit() {
     this.taskInformation = await this.database.getTasks();
+    console.log(this.taskInformation);
     this.crudTask.timeSkeleton();
   }
 
@@ -99,7 +101,11 @@ export class TodoListPage {
   }
 
   public updateAsyncTask(event: { id: string, complete: boolean }): void {
-     this.crudTask.updateTask(event);
+    this.crudTask.updateTask(event);
+  }
+
+  public async assignedIdToCategory(event:Partial<ICategoryDTO & {idTask:string}>){
+      this.crudTask.assignedCategory(event);
   }
 
   public viewInformationComplete(): void {
