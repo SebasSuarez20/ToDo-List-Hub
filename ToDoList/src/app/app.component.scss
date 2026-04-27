@@ -1,0 +1,297 @@
+.maintenance-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 25px 25px;
+  z-index: 9999;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.5rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 4rem;
+    padding: 3rem;
+    text-align: left;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Robot Section - Responsive Scaling
+// ─────────────────────────────────────────────────────────────────────────────
+.robot-section {
+  position: relative;
+  width: 100%;
+  max-width: 260px; // Más pequeño en mobile
+  height: 320px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.85); // Escala base para mobile
+
+  @media (min-width: 768px) {
+    max-width: 320px;
+    height: 400px;
+    margin-bottom: 0;
+    transform: scale(1);
+  }
+}
+
+.robot-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.robot-head {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transform: rotate(-12deg);
+  animation: floating-head 4s infinite ease-in-out;
+  z-index: 5;
+
+  .head-base {
+    width: 110px;
+    height: 100px;
+    background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+    border: 5px solid #1e293b;
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+
+    @media (min-width: 768px) {
+      width: 130px;
+      height: 120px;
+      border-width: 6px;
+    }
+  }
+
+  .face {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 45px;
+    background: #0f172a;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    border: 2px solid #334155;
+
+    @media (min-width: 768px) {
+      width: 90px;
+      height: 55px;
+      border-width: 3px;
+    }
+  }
+
+  .eye-x .line {
+    width: 18px;
+    height: 4px;
+    background: #06b6d4;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
+    @media (min-width: 768px) { width: 22px; height: 5px; }
+  }
+
+  .cable-connection {
+    width: 20px;
+    height: 30px;
+    background: repeating-linear-gradient(#1e293b, #1e293b 5px, #475569 5px, #475569 10px);
+    margin: -4px auto 0;
+  }
+}
+
+.robot-body {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+  width: 150px;
+  height: 170px;
+
+  @media (min-width: 768px) {
+    width: 180px;
+    height: 200px;
+    bottom: 40px;
+  }
+
+  .torso {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+    border: 5px solid #1e293b;
+    border-radius: 40px 40px 60px 60px;
+    @media (min-width: 768px) { border-width: 6px; }
+  }
+
+  .arm {
+    position: absolute;
+    width: 40px;
+    height: 90px;
+    background: #e2e8f0;
+    border: 5px solid #1e293b;
+    border-radius: 20px;
+    z-index: -1;
+
+    &.arm-left { top: 10px; left: -25px; transform: rotate(20deg); }
+    &.arm-right { top: 40px; right: -25px; transform: rotate(-30deg); }
+
+    @media (min-width: 768px) {
+      width: 50px; height: 110px; border-width: 6px;
+      &.arm-left { left: -35px; }
+      &.arm-right { right: -35px; }
+    }
+  }
+}
+
+.smoke-container {
+  position: absolute;
+  bottom: -10px;
+  left: 30px;
+  .smoke-blob {
+    position: absolute;
+    background: #cbd5e1;
+    border-radius: 50%;
+    filter: blur(6px);
+    opacity: 0;
+    animation: smoke-rise 3s infinite ease-out;
+  }
+  .s1 { width: 35px; height: 35px; animation-delay: 0s; }
+  .s2 { width: 25px; height: 25px; left: 15px; animation-delay: 1s; }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Text Section - Responsive Typography
+// ─────────────────────────────────────────────────────────────────────────────
+.text-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.oops-bubble {
+  background: #1e293b;
+  color: #fff;
+  padding: 8px 20px;
+  font-weight: 900;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+    padding: 10px 28px;
+    &::after {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-right: 12px solid #1e293b;
+    }
+  }
+}
+
+.code-sliced {
+  font-size: 6rem; // Tamaño móvil
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 0.9;
+  position: relative;
+  margin: 0;
+
+  @media (min-width: 768px) {
+    font-size: 10rem;
+  }
+  
+  &::before, &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::before {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    transform: translate(4px, -2px);
+    @media (min-width: 768px) { transform: translate(6px, -3px); }
+  }
+
+  &::after {
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+    transform: translate(-4px, 2px);
+    color: #475569;
+    @media (min-width: 768px) { transform: translate(-6px, 3px); }
+  }
+}
+
+.status-text {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #1e293b;
+  letter-spacing: 4px;
+  margin: 0.5rem 0 1.5rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+    letter-spacing: 8px;
+  }
+}
+
+.maintenance-msg {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.5;
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  span {
+    color: #0f172a;
+    font-weight: 800;
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 8px;
+
+    @media (min-width: 768px) {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Animations (Persist)
+// ─────────────────────────────────────────────────────────────────────────────
+@keyframes floating-head {
+  0%, 100% { transform: translate(0, 0) rotate(-12deg); }
+  50% { transform: translate(-8px, -15px) rotate(-8deg); }
+}
+
+@keyframes eye-flicker {
+  0%, 80%, 100% { opacity: 1; transform: scale(1); }
+  85% { opacity: 0; transform: scale(1.1); }
+}
+
+@keyframes smoke-rise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateY(-80px) scale(2); opacity: 0; }
+}
