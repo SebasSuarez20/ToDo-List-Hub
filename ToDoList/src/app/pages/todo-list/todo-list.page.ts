@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
@@ -45,8 +45,11 @@ export class TodoListPage {
   private destroy$ = new Subject<void>();
   public isAllTask:boolean = true;
   public formTask: FormGroup;
-
- 
+  public informationProgress = signal<{ total: number, totalSuccess: number,porcentage:number }>({
+    total: 0,
+    totalSuccess: 0,
+    porcentage:0
+  });
 
   constructor(
     private readonly database: DatabaseServiceTask, 
@@ -120,6 +123,12 @@ export class TodoListPage {
     }
 
     this.crudTask.timeSkeleton();
+
+    this.informationProgress.set({
+       total:this.taskInformation.length,
+       totalSuccess: this.taskInformation.filter(s => s.is_completed).length,
+       porcentage: this.taskInformation.length > 0 ? ((this.taskInformation.filter(s => s.is_completed).length) / this.taskInformation.length ) * 100 : 0
+    })
   }
 
   public async insertAsyncTask(): Promise<void> {

@@ -47,6 +47,16 @@ export class CategoryActions {
       })
     }
 
+    private rebootFormGroup(){
+      return {
+          id: null,
+          name: "",
+          value: 0,
+          is_delete: false,
+          created_at: null
+        }
+    }
+
    public async saveAsync(formCategory:FormGroup) : Promise<void> {
 
     if (formCategory.valid) {
@@ -58,7 +68,7 @@ export class CategoryActions {
          }
 
          this.newCategoryAsync(formCategory);
-         formCategory.reset()
+        formCategory.patchValue(this.rebootFormGroup())
       } catch (err) {
         this.alert.error("", `${err}`)
         this.isLoading.set(false);
@@ -96,7 +106,7 @@ export class CategoryActions {
       await this.database.updteCategoryForId(id, name);
       await this.databaseTask.triggerTask(actionDb.update, { id: id, name: name });
       await this.alert.success("Excelente", "Se actualizo la categoria.", 1500);
-       formCategory.reset();
+       formCategory.reset(this.rebootFormGroup());
        this.isUpdate = false;
     } catch (err) {
       this.alert.error("", "Error al actualizar la categoria.");

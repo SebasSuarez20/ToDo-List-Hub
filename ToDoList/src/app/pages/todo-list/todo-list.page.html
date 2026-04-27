@@ -29,28 +29,23 @@
     <div class="stats-card glass-card">
       <div class="stats-row">
         <div class="stat-item">
-          <span class="stat-number">5</span>
+          <span class="stat-number">{{this.informationProgress().total}}</span>
           <span class="stat-label">Total</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
-          <span class="stat-number completed-num">3</span>
+          <span class="stat-number completed-num">{{this.informationProgress().totalSuccess}}</span>
           <span class="stat-label">Hechas</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number pending-num">2</span>
-          <span class="stat-label">Pendientes</span>
         </div>
       </div>
 
       <div class="progress-section">
         <div class="progress-header">
           <span class="progress-label">Progreso del día</span>
-          <span class="progress-percent">60%</span>
+          <span class="progress-percent">{{this.informationProgress().porcentage}}%</span>
         </div>
         <div class="progress-track">
-          <div class="progress-fill" style="width: 60%"></div>
+          <div class="progress-fill" style="width: 60%" [style]="'width: '+ this.informationProgress().porcentage + '%'"></div>
         </div>
       </div>
     </div>
