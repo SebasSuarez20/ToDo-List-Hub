@@ -81,7 +81,7 @@ export class CategoriesPage {
           this.categoryInformation.set(res);
           this.actionCategory.loadingUpdate(false);
         },
-        error: (err) => this.logger.error("Error: Data de información incorrectamente ", err)
+        error: (err) => this.logger.error("Data de información incorrectamente ", err)
       })
   };
 

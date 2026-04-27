@@ -28,7 +28,7 @@ export class DatabaseServiceCategory {
       const dataFilter = data?.filter((s: ICategoryDTO) => s.is_delete == false);
       return dataFilter ?? [];
     } catch (err) {
-      throw new Error(`${err}`);
+      throw err;
     }
   }
 
@@ -48,39 +48,44 @@ export class DatabaseServiceCategory {
       await this.updateCategory(data);
       await this.storageObserver();
     } catch (err) {
-      throw new Error(`Error: ${err}`);
+      throw err;
     }
   }
 
-  async insertCategory(modeldto: ICategoryDTO) {
+   public async insertCategory(modeldto: ICategoryDTO) {
     try {
 
-      if(modeldto === null) throw new Error("modelo incorrecto al enviar.");
+      if (modeldto === null) throw new Error("modelo incorrecto al enviar.");
+
+      const validatorUniqueTask = (await this.getCategory()).
+        some(s => s.name.trim().toLocaleLowerCase() == modeldto.name.trim().toLocaleLowerCase());
+
+      if (validatorUniqueTask) throw new Error("Categoria ya existente");
 
       const data = await this.getCategory();
       data.push(modeldto);
       await this._storage?.set(this.keyDb, data);
       await this.storageObserver();
     } catch (err) {
-      throw new Error(`Error: ${err}`);
+      throw err;
     }
   }
 
   public async deleteCategory(id: string) {
 
-    if(id === null || id === "") throw new Error("no se encontro el id correspondiente.");
-      try{
-         const data = (await this.getCategory()).map((s: ICategoryDTO) => {
-      if (s.id == id) {
-        s.is_delete = true;
-      }
-      return s;
-    });
-    await this.updateCategory(data);
-    await this.storageObserver();
-      }catch(err){
-        throw new Error(`${err}`);
-      }
+    if (id === null || id === "") throw new Error("no se encontro el id correspondiente.");
+    try {
+      const data = (await this.getCategory()).map((s: ICategoryDTO) => {
+        if (s.id == id) {
+          s.is_delete = true;
+        }
+        return s;
+      });
+      await this.updateCategory(data);
+      await this.storageObserver();
+    } catch (err) {
+      throw err;
+    }
   }
 
   private async storageObserver() {

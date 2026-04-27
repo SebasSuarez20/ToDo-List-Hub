@@ -117,3 +117,8 @@
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+.scrollable-content {
+  max-height: calc(3 * 4rem); /* Altura máxima basada en 3 elementos de 4rem cada uno */
+  overflow-y: auto; /* Habilita el scroll vertical */
+}
+

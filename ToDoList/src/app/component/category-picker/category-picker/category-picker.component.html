@@ -1,0 +1,35 @@
+<!-- MODAL DE SELECCIÓN DE CATEGORÍA PREMIUM -->
+<div class="side-panel-overlay" [class.panel-active]="this.IsvisiblityPanel" (click)="closePanel()">
+
+  <div class="glass-modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="header-indicator"></div>
+      <h3 class="modal-title">Elegir Categoría</h3>
+      <p class="modal-subtitle">Organiza tus tareas con estilo</p>
+      <button class="close-modal-btn" (click)="closePanel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <div class="categories-grid-container">
+      @for (item of this.informationCategory; track $index) {
+      <div class="category-grid-card" (click)="this.assigned(item)">
+        <div class="card-glow"></div>
+        <div class="card-inner">
+          <div class="category-icon-wrapper">
+            <ion-icon [name]="'rocket'"></ion-icon>
+          </div>
+          <span class="category-card-name">{{item.name}}</span>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="modal-footer">
+      <div class="footer-tip">
+        <ion-icon name="rocket-outline"></ion-icon>
+        <span>Desliza para explorar todas tus categorías</span>
+      </div>
+    </div>
+  </div>
+</div>
