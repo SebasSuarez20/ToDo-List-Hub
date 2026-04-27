@@ -25,7 +25,7 @@ import { DatabaseServiceCategory } from 'src/app/services/dbCategory/database.se
     IonIcon, IonInput],
   styleUrls: ['./category-picker.component.scss'],
 })
-export class CategoryPickerComponent implements OnInit {
+export class CategoryPickerComponent  {
 
   @Input() IsvisiblityPanel!: boolean;
   @Input() informationCategory: Partial<ICategoryDTO>[] = [];
@@ -42,12 +42,6 @@ export class CategoryPickerComponent implements OnInit {
       airplaneOutline, cafeOutline, homeOutline, wineOutline
     });
   }
-
-  ngOnInit(): void {
-    console.log(this.informationCategory);
-  }
-
-
 
   public assigned(element: Partial<ICategoryDTO>) {
     this.assignedId.emit(element);

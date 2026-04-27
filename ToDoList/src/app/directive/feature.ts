@@ -14,9 +14,6 @@ export class Feature {
     @Input() set appFeature(flag: string) {
 
     const isEnabled = this.firebaseService.getBoolean(flag);
-
-    console.log(isEnabled);
-
     this.viewContainer.clear();
 
     if (isEnabled) {
