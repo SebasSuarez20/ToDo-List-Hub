@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { featureGuard } from './guard/feature-guard';
 
 export const routes: Routes = [
   {
@@ -8,6 +9,7 @@ export const routes: Routes = [
   {
     path: 'todo-list',
     loadComponent: () => import('./pages/todo-list/todo-list.page').then((m) => m.TodoListPage),
+    canActivate:[featureGuard]
   },
   {
     path: '',
@@ -21,5 +23,9 @@ export const routes: Routes = [
   {
     path: 'task-list',
     loadComponent: () => import('./component/task-list/task-list/task-list.page').then( m => m.TaskListPage)
+  },
+  {
+    path: 'not-available',
+    loadComponent: () => import('./pages/not-available/not-available.component').then( m => m.NotAvailableComponent)
   }
 ];

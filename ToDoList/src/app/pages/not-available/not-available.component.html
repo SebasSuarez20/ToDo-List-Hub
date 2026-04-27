@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true" class="ion-no-padding">
+  <div class="page-container">
+    <div class="background-glow">
+      <div class="orb orb-purple"></div>
+      <div class="orb orb-cyan"></div>
+    </div>
+
+    <div class="glass-card">
+      <div class="illustration-wrapper">
+        <img src="assets/images/restricted.png" alt="Restricted Access" class="floating-portal">
+        <div class="portal-shadow"></div>
+      </div>
+
+      <div class="content-box">
+        <ion-text color="light">
+          <h1 class="main-title">Acceso Restringido</h1>
+        </ion-text>
+        <p class="description">
+          Esta ruta está protegida por protocolos de seguridad. No tienes los permisos necesarios para ingresar a esta sección del sistema.
+        </p>
+
+        <div class="badge-container">
+          <div class="security-badge">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            <span>RUTA PROTEGIDA</span>
+          </div>
+        </div>
+
+        <ion-button (click)="goHome()" fill="clear" class="back-btn">
+          <ion-icon slot="start" name="shield-outline"></ion-icon>
+          Volver a Salvo
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

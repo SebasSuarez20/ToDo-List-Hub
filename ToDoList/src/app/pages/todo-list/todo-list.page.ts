@@ -20,6 +20,7 @@ import { LoggerService } from 'src/app/services/logger/logger.service';
 import { ActionCrudToDoList } from 'src/app/services/ToDoList-actions/action-crud-to-do-list';
 import { ICategoryDTO } from 'src/app/model/dto/IcategoryDTO';
 import { ITaskStorageDTO } from 'src/app/model/dto/ITaskStorageDto';
+import { Feature } from "src/app/directive/feature";
 
 @Component({
   selector: 'app-todo-list',
@@ -31,8 +32,9 @@ import { ITaskStorageDTO } from 'src/app/model/dto/ITaskStorageDto';
     IonIcon, IonInput, IonItemSliding, IonItemOptions, IonItemOption, IonTextarea,
     IonSelect, IonSelectOption,
     RouterLink, ReactiveFormsModule, CommonModule,
-    TaskListPage
-  ],
+    TaskListPage,
+    Feature
+],
 })
 export class TodoListPage {
 

@@ -1,3 +1,53 @@
 <ion-app>
+@if (this.isDisplayMaintenance) {
+  <div class="maintenance-wrapper">
+    <div class="robot-section">
+      <div class="robot-container">
+        <!-- Cabeza del Robot -->
+        <div class="robot-head">
+          <div class="head-base">
+            <div class="face">
+              <div class="eye-x left">
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+              <div class="eye-x right">
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
+            </div>
+          </div>
+          <div class="cable-connection"></div>
+        </div>
+
+        <!-- Cuerpo del Robot -->
+        <div class="robot-body">
+          <div class="torso"></div>
+          <div class="arm arm-left"></div>
+          <div class="arm arm-right"></div>
+          <div class="smoke-container">
+            <div class="smoke-blob s1"></div>
+            <div class="smoke-blob s2"></div>
+            <div class="smoke-blob s3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-section">
+      <div class="oops-bubble">OOPS...</div>
+      <div class="code-container">
+        <h1 class="code-sliced" data-text="404">404</h1>
+        <h2 class="status-text">ERROR</h2>
+      </div>
+      <p class="maintenance-msg">
+        Parece que algo se rompió... <br>
+        <span>Estamos reparando el sistema.</span>
+      </p>
+    </div>
+  </div>
+} @else {
   <ion-router-outlet></ion-router-outlet>
+}
+
 </ion-app>
