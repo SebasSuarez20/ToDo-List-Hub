@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ToDoList   # 🔥 CLAVE
+        working-directory: ToDoList   
 
     steps:
       # 1. Clonar repo
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       # 3. Java
       - name: Setup Java 17
@@ -32,7 +32,7 @@ jobs:
 
       # 4. Instalar dependencias
       - name: Install dependencies
-        run: npm ci   # 🔥 mejor que npm install
+        run: npm ci   
 
       # 5. Build Angular / Ionic
       - name: Build app
