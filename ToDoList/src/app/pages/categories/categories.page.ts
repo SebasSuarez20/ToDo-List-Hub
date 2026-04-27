@@ -88,13 +88,11 @@ export class CategoriesPage {
   public async loadingInit() {
     const data = await this.actionCategory.loadStorage();
     this.categoryInformation.set(data);
-    console.log(this.categoryInformation());
     this.actionCategory.timeSkeleton();
   };
 
 
   public save(){
-    console.log(this.formCategory);
      this.actionCategory.saveAsync(this.formCategory);
   }
 

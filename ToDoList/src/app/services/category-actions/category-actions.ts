@@ -81,7 +81,6 @@ export class CategoryActions {
       })
       await this.alert.success("Excelente", "Se creo correctamente la categoria.", 1500);
     } catch (err) {
-      console.log(err);
       this.alert.error(`Error`, `${err}`);
       this.isLoading.set(false);
     }
