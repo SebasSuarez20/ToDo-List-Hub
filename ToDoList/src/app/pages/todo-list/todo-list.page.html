@@ -76,15 +76,18 @@
 
     <!-- ---- Sección de filtros ---- -->
     <div class="filter-row">
-      <button class="filter-chip" [ngClass]="isAllTask ? 'active' : ''" (click)="this.isAllTask = true">Todas</button>
+      <button class="filter-chip" [ngClass]="isAllTask ? 'active' : ''" (click)="viewAll()">Todas</button>
       <button class="filter-chip" [ngClass]="isAllTask ? '' : 'active'"
         (click)="viewInformationComplete()">Completadas</button>
     </div>
+
     @if (this.isAllTask) {
-    <app-task-list [taskInformation]="taskInformation" [isLoading]="isLoading()" (deleteTask)="this.deleteAsyncTask($event)"
-      (addTask)="this.updateAsyncTask($event)" (assignedId)="this.assignedIdToCategory($event)" />
+    <app-task-list [taskInformation]="taskInformation" [taskInformationCopy]="taskDataCopy" [isLoading]="isLoading()"
+      (deleteTask)="this.deleteAsyncTask($event)" (addTask)="this.updateAsyncTask($event)"
+      (assignedId)="this.assignedIdToCategory($event)" />
     }@else {
-    <app-task-list [taskInformation]="taskInformationComplete" [isLoading]="isLoading()" />
+    <app-task-list [taskInformation]="taskInformationComplete" [taskInformationCopy]="taskDataCopy"
+      [isLoading]="isLoading()" />
     }
   </div>
 </ion-content>

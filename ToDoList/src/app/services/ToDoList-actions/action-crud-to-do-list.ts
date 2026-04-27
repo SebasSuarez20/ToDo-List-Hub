@@ -5,8 +5,9 @@ import { DatabaseServiceTask } from '../dbTask/database.service';
 import { AlertService } from '../alert/alert.service';
 import { LoggerService } from '../logger/logger.service';
 import { taskModel } from 'src/app/model/taskModel';
-import { timer } from 'rxjs';
+import { BehaviorSubject, timer } from 'rxjs';
 import { ICategoryDTO } from 'src/app/model/dto/IcategoryDTO';
+import { ITaskStorageDTO } from 'src/app/model/dto/ITaskStorageDto';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import { ICategoryDTO } from 'src/app/model/dto/IcategoryDTO';
 export class ActionCrudToDoList {
 
   public isLoading = signal(true);
+   public data$ = new BehaviorSubject<Partial<ITaskStorageDTO> | null>(null);
   
 
   constructor(
@@ -84,18 +86,34 @@ export class ActionCrudToDoList {
     }
   }
 
-  public loadingUpdate(value:boolean){
-     this.isLoading.set(value);
+  public loadingUpdate(value: boolean) {
+    this.isLoading.set(value);
   }
 
-    public async assignedCategory(event:Partial<ICategoryDTO & {idTask:string}>){
-        try{
-          const { idTask,id,name} = event;
-          await this.database.updateTaskAssigned(idTask ?? "",id ?? "",name ?? "");
-        }catch(err){
-           this.logger.error('Error: ',`${err}`);
-        }
-        
+  public async assignedCategory(event: Partial<ICategoryDTO & { idTask: string }>) {
+    try {
+      const { idTask, id, name } = event;
+      await this.database.updateTaskAssigned(idTask ?? "", id ?? "", name ?? "");
+    } catch (err) {
+      this.logger.error('Error: ', `${err}`);
     }
+
+  }
+
+  public updateVersionTask(model:Partial<ITaskStorageDTO>){
+      const version = this.getVersionTask();
+      model.version = version;
+      this.data$.next(model);
+  }
+
+  public getVersionTask() : number{
+     return (this.data$.value?.version ?? 0) + 1;
+  }
+
+  public dataInitialObservableVersion(){
+    return this.data$.value?.data ?? [];
+  }
+
+   
 
 }

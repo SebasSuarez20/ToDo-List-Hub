@@ -1,100 +1,162 @@
- <!-- ---- Lista de Tareas ---- -->
-    <div class="task-section">
-      <h2 class="section-heading">
-        <ion-icon name="list-outline"></ion-icon> Tus Tareas
-      </h2>
-
-      <ion-list class="tasks-list">
-
-        @if (isLoading) {
-          <!-- SKELETON LOADER -->
-          <app-loading-skeleton/>
-        } @else {
-          <!-- TAREA COMPLETADA -->
-          @for (task of taskInformation; track task.id) {
-            <ion-item-sliding>
-              <ion-item lines="none" class="task-card" [class.task-done]="task.is_completed">
-                <div class="task-body">
-                  <div class="task-check" [class.check-active]="task.is_completed" (click)="updateAsyncTask(task.id,task.is_completed)">
-                    <ion-icon [name]="task.is_completed ? 'checkmark' : ''"></ion-icon>
-                  </div>
-                  <div class="task-info">
-                    <!-- CATEGORY BADGE EXTREMADAMENTE HERMOSO -->
-                    <div class="category-badge-wrapper">
-                      <span class="category-badge-premium">
-                        <ion-icon name="bookmark-outline"></ion-icon>
-                        <span> {{task.id_category !== null ? "Categoria:" + task.name_category : 'Sin vinculación de categoria.'}}</span>
-                      </span>
-                    </div>
-
-                    <p class="task-title" [class.task-strike]="task.is_completed">{{ task.title }}</p>
-                    
-                    <div class="task-meta">
-                      <span class="task-date">Fecha Creación: {{ task.created_at | date:'dd-mm-yyy | hh:mm:ss' }}</span>
-                      
-                              
-                      <div class="neo-select-wrapper" (click)="toggleSidePanel(task)">
-                        <div class="priority-trigger">
-                          <div class="status-indicator"></div>
-                          <span class="trigger-label">Asignar Categoría</span>
-                          <ion-icon name="chevron-forward-outline" class="trigger-arrow"></ion-icon>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="task-actions">
-                    <button class="action-icon delete-icon" (click)="this.deleteAsyncTask(task.id)">
-                      <ion-icon name="trash-outline"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-              </ion-item>
-  
-              <ion-item-options side="end">
-                <ion-item-option color="danger" class="swipe-delete">
-                  <ion-icon slot="top" name="trash-outline"></ion-icon>
-                  Borrar
-                </ion-item-option>
-              </ion-item-options>
-            </ion-item-sliding>
-          }
-        }
-
-      </ion-list>
-
-      @if (showSidePanel) {
-        <app-category-picker [IsvisiblityPanel]="this.showSidePanel" 
-        [informationCategory]="this.informationCategory"
-        (assignedId)="this.assignedCategory($event)" />
-      }
-      
-      <!-- Paginador Neo-Glass -->
-      <div class="paginator-container">
-        <div class="neo-paginator">
-          <button class="neo-nav-btn prev" disabled>
-            <div class="btn-glow"></div>
-            <div class="double-icon">
-              <ion-icon name="chevron-back-outline"></ion-icon>
-              <ion-icon name="chevron-back-outline"></ion-icon>
-            </div>
-          </button>
-          
-          <div class="neo-page-display">
-            <div class="orb-container">
-              <div class="orb-ring"></div>
-              <div class="orb-core">
-                <span class="number">1</span>
-              </div>
-            </div>
-          </div>
-
-          <button class="neo-nav-btn next">
-            <div class="btn-glow"></div>
-            <div class="double-icon">
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-            </div>
-          </button>
+<!-- ---- Lista de Tareas ---- -->
+<div class="task-section">
+  <!-- ---- Filtro de Categorías Espectacular ---- -->
+  <div class="category-filter-card glass-card" id="category-trigger">
+    <div class="custom-select-wrap">
+      <div class="select-label-group">
+        <ion-icon name="filter-outline" class="select-icon"></ion-icon>
+        <div class="label-texts">
+          <span class="select-subtitle">Categoría</span>
+          <span class="select-title">Filtrar por...</span>
+        </div>
+      </div>
+      <div class="fake-select" (click)="this.loadInitCategory(null)">
+        <span class="current-value">Seleccionar</span>
+        <div class="chevron-box">
+          <ion-icon name="chevron-down-outline"></ion-icon>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Popover con opciones Espectaculares -->
+  <ion-popover trigger="category-trigger" triggerAction="click" class="premium-popover" [dismissOnSelect]="true">
+    <ng-template>
+      <div class="popover-glass-container">
+        <div class="popover-header">
+          <h3>Explorar Categorías</h3>
+          <div class="header-line"></div>
+        </div>
+
+        <!-- Agregar clase para scroll -->
+        <div class="options-list scrollable-content">
+          <button class="option-item" [class.active]="selectedCategoryId === null" (click)="filterInformationForCategory(null)">
+            <div class="icon-blob all-bg">
+              <ion-icon name="rocket-outline"></ion-icon>
+            </div>
+            <div class="option-info">
+              <span class="option-name">Todas</span>
+              <span class="option-desc">Ver todas tus tareas</span>
+            </div>
+            @if (selectedCategoryId === null) {
+              <div class="active-indicator"></div>
+            }
+          </button>
+
+          @for (item of informationCategory; track item.id) {
+          <button class="option-item" [class.active]="selectedCategoryId === item.id" (click)="filterInformationForCategory(item?.id)">
+            <div class="icon-blob work-bg">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </div>
+            <div class="option-info">
+              <span class="option-name">{{item.name}}</span>
+            </div>
+            @if (selectedCategoryId === item.id) {
+              <div class="active-indicator"></div>
+            }
+          </button>
+          }
+        </div>
+      </div>
+    </ng-template>
+  </ion-popover>
+
+  <h2 class="section-heading">
+    <ion-icon name="list-outline"></ion-icon> Tus Tareas
+  </h2>
+
+  <ion-list class="tasks-list">
+
+    @if (isLoading) {
+    <!-- SKELETON LOADER -->
+    <app-loading-skeleton />
+    } @else {
+    <!-- TAREA COMPLETADA -->
+    @for (task of taskInformation; track task.id) {
+    <ion-item-sliding>
+      <ion-item lines="none" class="task-card" [class.task-done]="task.is_completed">
+        <div class="task-body">
+          <div class="task-check" [class.check-active]="task.is_completed"
+            (click)="updateAsyncTask(task.id,task.is_completed)">
+            <ion-icon [name]="task.is_completed ? 'checkmark' : ''"></ion-icon>
+          </div>
+          <div class="task-info">
+            <!-- CATEGORY BADGE EXTREMADAMENTE HERMOSO -->
+            <div class="category-badge-wrapper">
+              <span class="category-badge-premium">
+                <ion-icon name="bookmark-outline"></ion-icon>
+                <span> {{task.id_category !== null ? "Categoria:" + task.name_category : 'Sin vinculación de
+                  categoria.'}}</span>
+              </span>
+            </div>
+
+            <p class="task-title" [class.task-strike]="task.is_completed">{{ task.title }}</p>
+
+            <div class="task-meta">
+              <span class="task-date">Fecha Creación: {{ task.created_at | date:'dd-mm-yyy | hh:mm:ss' }}</span>
+
+
+              <div class="neo-select-wrapper" (click)="toggleSidePanel(task)">
+                <div class="priority-trigger">
+                  <div class="status-indicator"></div>
+                  <span class="trigger-label">Asignar Categoría</span>
+                  <ion-icon name="chevron-forward-outline" class="trigger-arrow"></ion-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="task-actions">
+            <button class="action-icon delete-icon" (click)="this.deleteAsyncTask(task.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" class="swipe-delete">
+          <ion-icon slot="top" name="trash-outline"></ion-icon>
+          Borrar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    }
+    }
+
+  </ion-list>
+
+  @if (showSidePanel) {
+  <app-category-picker [IsvisiblityPanel]="this.showSidePanel" [informationCategory]="this.informationCategory"
+    (assignedId)="this.assignedCategory($event)" />
+  }
+
+  <!-- Paginador Neo-Glass -->
+  <div class="paginator-container">
+    <div class="neo-paginator">
+      <button class="neo-nav-btn prev" disabled>
+        <div class="btn-glow"></div>
+        <div class="double-icon">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </div>
+      </button>
+
+      <div class="neo-page-display">
+        <div class="orb-container">
+          <div class="orb-ring"></div>
+          <div class="orb-core">
+            <span class="number">1</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="neo-nav-btn next">
+        <div class="btn-glow"></div>
+        <div class="double-icon">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
