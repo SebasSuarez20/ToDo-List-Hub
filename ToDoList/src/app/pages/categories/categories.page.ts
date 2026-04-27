@@ -81,18 +81,20 @@ export class CategoriesPage {
           this.categoryInformation.set(res);
           this.actionCategory.loadingUpdate(false);
         },
-        error: (err) => this.logger.error("Error: Data de información incorrectamente ", err)
+        error: (err) => this.logger.error("Data de información incorrectamente ", err)
       })
   };
 
   public async loadingInit() {
     const data = await this.actionCategory.loadStorage();
     this.categoryInformation.set(data);
+    console.log(this.categoryInformation());
     this.actionCategory.timeSkeleton();
   };
 
 
   public save(){
+    console.log(this.formCategory);
      this.actionCategory.saveAsync(this.formCategory);
   }
 
