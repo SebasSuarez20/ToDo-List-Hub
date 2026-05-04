@@ -1,0 +1,13 @@
+workflows:
+  ionic-ios-build:
+    name: Ionic iOS Build
+    environment:
+      node: 18
+    scripts:
+      - npm install -g ionic cordova
+      - npm install
+      - ionic cordova platform add ios
+      - ionic cordova build ios --release
+    artifacts:
+      - platforms/ios/build/**/*.app
+      - platforms/ios/build/**/*.ipa
