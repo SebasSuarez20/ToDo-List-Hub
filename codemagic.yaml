@@ -4,7 +4,7 @@ workflows:
     environment:
       node: 18
     scripts:
-      - npm install -g ionic cordova
+      - npm install -g ionic cordova --force
       - npm install
       - ionic cordova platform add ios
       - ionic cordova build ios --release
